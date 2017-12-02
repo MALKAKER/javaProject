@@ -12,23 +12,28 @@ public class Branch
     private long branchNumber;
 
     //constructor
-    public Branch(Address branchAddress, int parkingSpace, long branchNumber) {
+    public Branch(Address branchAddress, int parkingSpace, long branchNumber) throws Exception {
         this.setBranchAddress(branchAddress);
         this.setParkingSpace(parkingSpace);
         this.setBranchNumber(branchNumber);
     }
 
     //copy constructor
-    public Branch(Branch newBranch) {
+    public Branch(Branch newBranch) throws Exception {
         this.setBranchAddress(newBranch.branchAddress);
         this.setParkingSpace(newBranch.parkingSpace);
         this.setBranchNumber(newBranch.branchNumber);
     }
+
+    public Branch() {
+
+    }
+
     public Address getBranchAddress() {
         return branchAddress;
     }
 
-    public void setBranchAddress(Address branchAddress) {
+    public void setBranchAddress(Address branchAddress) throws Exception {
         this.branchAddress = new Address(branchAddress);
     }
 
@@ -36,7 +41,11 @@ public class Branch
         return parkingSpace;
     }
 
-    public void setParkingSpace(int parkingSpace) {
+    public void setParkingSpace(int parkingSpace)throws Exception {
+        if (parkingSpace < 1)
+        {
+            throw new Exception("invalid value!");
+        }
         this.parkingSpace = parkingSpace;
     }
 
@@ -49,4 +58,8 @@ public class Branch
     }
     //get and set
 
+    @Override
+    public String toString() {
+        return branchAddress.toString();
+    }
 }

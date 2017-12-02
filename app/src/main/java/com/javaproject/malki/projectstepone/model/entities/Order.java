@@ -10,46 +10,63 @@ import java.util.Date;
 
 public class Order
 {
-    private int clientNumber;
+    //static field to edit the request number
+    private static int number = 0;
+    private int clientNumber;//client number is the client's ID
     private boolean orderStatus; //true = open , false = close
     private int carNumber;
-    private Date startRent;
+    private Date startRent = new Date();//initialized only when creating the order
     private Date endRent;
     private float startMileage;
     private float endMileage;
     private boolean isFuel;
     private float fuelVol = 0;
     private DecimalFormat billAmount;
-    private  int orderNumber;
+    final int orderNumber;
+
+
+
+    //private functions
+    private void ErrorValue(float val) throws Exception
+    {
+        if( val <= 0)
+        {
+            throw new Exception("invalid value!\n");
+        }
+    }
 
     //constructor
-    public Order(int clientNumber, boolean orderStatus, int carNumber, Date startRent, Date endRent, float startMileage, float endMileage, boolean isFuel, DecimalFormat billAmount, int orderNumber) {
+    public Order(int clientNumber, boolean orderStatus, int carNumber, Date endRent, float startMileage,
+                 float endMileage, boolean isFuel, DecimalFormat billAmount) throws Exception {
         this.setClientNumber(clientNumber);
         this.setOrderStatus(orderStatus);
         this.setCarNumber(carNumber);
-        this.setStartRent(startRent);
         this.setEndRent(endRent);
         this.setStartMileage(startMileage);
         this.setEndMileage(endMileage);
         this.setFuel(isFuel);
         this.setBillAmount(billAmount);
-        this.setOrderNumber(orderNumber);
+        //initialized only once when generate the order
+        this.orderNumber = ++number;
     }
 
     // copy constructor
-    public Order( Order newOrder){
+    public Order(Order newOrder) throws Exception {
+
         this.setClientNumber(newOrder.clientNumber);
         this.setOrderStatus(newOrder.orderStatus);
         this.setCarNumber(newOrder.carNumber);
-        this.setStartRent(newOrder.startRent);
         this.setEndRent(newOrder.endRent);
         this.setStartMileage(newOrder.startMileage);
         this.setEndMileage(newOrder.endMileage);
         this.setFuel(newOrder.isFuel);
         this.setBillAmount(newOrder.billAmount);
-        this.setOrderNumber(newOrder.orderNumber);
+        this.orderNumber = this.getOrderNumber();//?
     }
-
+    //empty constructor
+    public Order(int num) {
+        this.orderNumber = ++number;
+    }
     //get and set
     public int getClientNumber() {
         return clientNumber;
@@ -63,8 +80,10 @@ public class Order
         return orderStatus;
     }
 
-    public void setOrderStatus(boolean orderStatus) {
+    public void setOrderStatus(boolean orderStatus) throws Exception {
         this.orderStatus = orderStatus;
+        //when the order get close the date of end rent will be updated
+        if(!orderStatus){this.setEndRent(new Date());}
     }
 
     public int getCarNumber() {
@@ -87,7 +106,11 @@ public class Order
         return endRent;
     }
 
-    public void setEndRent(Date endtRent) {
+    public void setEndRent(Date endtRent) throws Exception {
+        if (endtRent.before(this.startRent))
+        {
+            throw new Exception("ERROR: The finish date isn't consistent with the start date!\n ");
+        }
         this.endRent = endtRent;
     }
 
@@ -95,7 +118,8 @@ public class Order
         return startMileage;
     }
 
-    public void setStartMileage(float startMileage) {
+    public void setStartMileage(float startMileage) throws Exception {
+        ErrorValue(startMileage);
         this.startMileage = startMileage;
     }
 
@@ -103,7 +127,8 @@ public class Order
         return endMileage;
     }
 
-    public void setEndMileage(float endMileage) {
+    public void setEndMileage(float endMileage) throws Exception {
+        ErrorValue(endMileage);
         this.endMileage = endMileage;
     }
 
@@ -119,7 +144,8 @@ public class Order
         return fuelVol;
     }
 
-    public void setFuelVol(float fuelVol){
+    public void setFuelVol(float fuelVol) throws Exception {
+        ErrorValue(fuelVol);
         this.fuelVol =isFuel()? fuelVol : 0;
     }
 
@@ -135,7 +161,8 @@ public class Order
         return orderNumber;
     }
 
-    public void setOrderNumber(int orderNumber) {
-        this.orderNumber = orderNumber;
+    @Override
+    public String toString() {
+        return String.format("%d",orderNumber);
     }
 }

@@ -1,3 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ProjectStepOne</string>
+    <string name="app_name">CAR2GO</string>
+    <string name="user_name">User Name</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="log_in">log in</string>
 </resources>

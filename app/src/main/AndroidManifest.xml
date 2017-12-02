@@ -9,13 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".controller.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".controller.chooseUserType" />
+        <activity android:name=".controller.ChooseBasicOptions" />
+        <activity android:name=".controller.AddData" />
+        <activity android:name=".controller.ReceiveData" />
+        <activity android:name=".controller.AddCar" />
+        <activity android:name=".controller.AddModel" />
+        <activity android:name=".controller.AddUser"></activity>
     </application>
 
 </manifest>

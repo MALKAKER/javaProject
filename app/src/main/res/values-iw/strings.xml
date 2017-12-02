@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name = "app_name">CAR2GO</string>
+    <string name = "user_name">שם משתמש</string>
+    <string name = "password">סיסמא</string>
+    <string name = "register">הרשם/הרשמי</string>
+    <string name = "log_in">הכנס/הכנסי</string>
+</resources>

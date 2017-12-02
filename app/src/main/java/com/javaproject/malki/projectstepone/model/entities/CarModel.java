@@ -3,17 +3,17 @@ package com.javaproject.malki.projectstepone.model.entities;
 import android.graphics.Color;
 
 /**
- * this class describing the car model,
+ * this class describes the car model,
  * including the properties of the car
  * Created by malki on 04-Nov-17.
  */
 
 public class CarModel {
-    private int model;//maybe the model number can be a hash like AS1234?
-    private String carCompany;
+    private String model;//maybe the model number can be a hash like AS1234?
+    private ENUMS.COMPANY carCompany;
     private String modelName;
     private int engineVol;
-    private Color carColor;
+    private ENUMS.COLORS carColor;
     private boolean isGearBox; // true (hand) false (auto)
     private boolean isLimitMileage;
     //if there is a mileage limitation this field is not empty
@@ -23,9 +23,26 @@ public class CarModel {
     private float trunkWidth;
     //private int trunkVol; - maybe unnecessary
     private boolean airConditioning;
+    private boolean isSafetySystem;
+    //if there is a safety system limitation this field is not empty
+    private ENUMS.SAFETY safetyType;
+    private int pollutionLevel;
 
+
+
+
+    //private functions
+    private void ErrorValue(float val) throws Exception
+    {
+        if( val <= 0)
+        {
+            throw new Exception("invalid value!\n");
+        }
+    }
     //constructor
-    public CarModel(int model, String carCompany, String modelName, int engineVol, Color carColor, boolean isGearBox, boolean isLimitMileage, short numberOfSeats, float trunkHeight, float trunkWidth, boolean airConditioning) {
+    public CarModel(String model, ENUMS.COMPANY carCompany, String modelName, int engineVol, ENUMS.COLORS carColor, boolean isGearBox,
+                    boolean isLimitMileage, short numberOfSeats, float trunkHeight, float trunkWidth, boolean airConditioning,
+                    boolean safetySystem, int pollution_level ) throws Exception {
         this.setModel(model);
         this.setCarCompany(carCompany);
         this.setModelName(modelName);
@@ -37,10 +54,12 @@ public class CarModel {
         this.setTrunkHeight(trunkHeight);
         this.setTrunkWidth(trunkWidth);
         this.setAirConditioning(airConditioning);
+        this.setSafetySystem(safetySystem);
+        this.setPollution_level(pollution_level);
     }
 
     //copy constructor
-    public CarModel( CarModel newCar) {
+    public CarModel( CarModel newCar) throws Exception {
         this.setModel(newCar.getModel());
         this.setCarCompany(newCar.getCarCompany());
         this.setModelName(newCar.getModelName());
@@ -52,22 +71,27 @@ public class CarModel {
         this.setTrunkHeight(newCar.getTrunkHeight());
         this.setTrunkWidth(newCar.getTrunkWidth());
         this.setAirConditioning(newCar.isAirConditioning());
+        this.setSafetySystem(newCar.isSafetySystem());
+        this.setPollution_level(newCar.getPollution_level());
     }
 
+    public CarModel() {
+
+    }
     //get and set
-    public int getModel() {
+    public String getModel() {
         return model;
     }
 
-    public void setModel(int model) {
+    public void setModel(String model) {
         this.model = model;
     }
 
-    public String getCarCompany() {
+    public ENUMS.COMPANY getCarCompany() {
         return carCompany;
     }
 
-    public void setCarCompany(String carCompany) {
+    public void setCarCompany(ENUMS.COMPANY carCompany) {
         this.carCompany = carCompany;
     }
 
@@ -83,15 +107,16 @@ public class CarModel {
         return engineVol;
     }
 
-    public void setEngineVol(int engineVol) {
+    public void setEngineVol(int engineVol) throws Exception {
+        ErrorValue(engineVol);
         this.engineVol = engineVol;
     }
 
-    public Color getCarColor() {
+    public ENUMS.COLORS getCarColor() {
         return carColor;
     }
 
-    public void setCarColor(Color carColor) {
+    public void setCarColor(ENUMS.COLORS carColor) {
         this.carColor = carColor;
     }
 
@@ -115,7 +140,8 @@ public class CarModel {
         return numberOfSeats;
     }
 
-    public void setNumberOfSeats(short numberOfSeats) {
+    public void setNumberOfSeats(short numberOfSeats) throws  Exception {
+        ErrorValue(numberOfSeats);
         this.numberOfSeats = numberOfSeats;
     }
 
@@ -123,7 +149,8 @@ public class CarModel {
         return trunkHeight;
     }
 
-    public void setTrunkHeight(float trunkHeight) {
+    public void setTrunkHeight(float trunkHeight) throws Exception {
+        ErrorValue(trunkHeight);
         this.trunkHeight = trunkHeight;
     }
 
@@ -131,7 +158,8 @@ public class CarModel {
         return trunkWidth;
     }
 
-    public void setTrunkWidth(float trunkWidth) {
+    public void setTrunkWidth(float trunkWidth) throws Exception {
+        ErrorValue(trunkWidth);
         this.trunkWidth = trunkWidth;
     }
 
@@ -147,7 +175,41 @@ public class CarModel {
         return mileageNumber;
     }
 
-    public void setMileageNumber(int mileageNumber) {
+    public void setMileageNumber(int mileageNumber) throws Exception {
+        ErrorValue(mileageNumber);
         this.mileageNumber = isLimitMileage ? mileageNumber : null;
+    }
+
+    public boolean isSafetySystem() {
+        return isSafetySystem;
+    }
+
+    public ENUMS.SAFETY getSafetyType() {
+        return safetyType;
+    }
+
+    public void setSafetySystem(boolean safetySystem) {
+        isSafetySystem = safetySystem;
+    }
+
+    public void setSafetyType(ENUMS.SAFETY safetyType) {
+        this.safetyType = isSafetySystem ? safetyType : null;
+    }
+
+    public int getPollution_level() {
+        return pollutionLevel;
+    }
+
+    public void setPollution_level(int pollution_level) throws Exception {
+        if(pollution_level > 15 && pollution_level < 1)
+        {
+            throw new Exception("ERROR: The pollution level is not valid!\n");
+        }
+        this.pollutionLevel = pollution_level;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s, %s, %s", model, carCompany, modelName);
     }
 }

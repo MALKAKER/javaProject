@@ -4,15 +4,123 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.javaproject.malki.projectstepone.MainActivity">
+    android:background="#ffffcc"
+    tools:context="com.javaproject.malki.projectstepone.controller.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:src="@drawable/large_logo"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="10dip"
+            android:text="@string/user_name"
+            android:textColor="#990000"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/enterUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/userName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="10dip"
+            android:hint="@string/user_name"
+            android:inputType="text"
+            android:textSize="30dp" />
+
+
+        <TextView
+            android:id="@+id/password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/enterUser"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="10dip"
+            android:text="@string/password"
+            android:textColor="#990000"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/enterPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/password"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="10dip"
+            android:hint="@string/password"
+            android:inputType="numberPassword"
+            android:textSize="30dp" />
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/signIn"
+
+            android:layout_alignBottom="@+id/signIn"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="77dp"
+            android:layout_marginStart="77dp"
+            android:background="#990000"
+            android:text="@string/register"
+            android:textColor="#b8b894"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/signIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/enterPassword"
+            android:layout_marginLeft="44dp"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="49dp"
+            android:layout_toEndOf="@+id/register"
+            android:layout_toRightOf="@+id/register"
+            android:background="#990000"
+            android:text="@string/log_in"
+            android:textColor="#b8b894"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+
+    </RelativeLayout>
+    <!--<Button-->
+            <!--android:id="@+id/ok"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_below="@id/entry"-->
+            <!--android:layout_marginLeft="10dip"-->
+            <!--android:text="OK" />-->
+
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignTop="@id/ok"-->
+            <!--android:layout_toLeftOf="@id/ok"-->
+            <!--android:text="Cancel" />-->
+    <!--</RelativeLayout>-->
 
 </android.support.constraint.ConstraintLayout>
