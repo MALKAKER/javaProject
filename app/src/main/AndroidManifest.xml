@@ -18,7 +18,6 @@
         </activity>
         <activity android:name=".controller.chooseUserType" />
         <activity android:name=".controller.ChooseBasicOptions" />
-        <activity android:name=".controller.AddData" />
         <activity android:name=".controller.ReceiveData" />
         <activity android:name=".controller.AddCar" />
         <activity android:name=".controller.AddModel" />

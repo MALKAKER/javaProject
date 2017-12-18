@@ -5,4 +5,45 @@
     <string name="password">Password</string>
     <string name="register">Register</string>
     <string name="log_in">log in</string>
+    <string name="driver">Driver</string>
+    <string name="employee">Employee</string>
+    <string name="add">Add</string>
+    <string name="search">Search</string>
+    <string name="car">Car</string>
+    <string name="model">Model</string>
+    <string name="user">User</string>
+    <string name="branch">Branch</string>
+    <string name="order">Order</string>
+    <string name="addCar">Add Car</string>
+    <string name="locNumber">Location Number</string>
+    <string name="mileage">Mileage</string>
+    <string name="fuel">Fuel</string>
+    <string name="addModel">Add Model</string>
+    <string name="licensePlate">License Plate</string>
+    <string name="company">Company</string>
+    <string name="modelType">Model Type</string>
+    <string name="color">Color</string>
+    <string name="engine_volume">Engeen Volume</string>
+    <string name="gear">Gear</string>
+    <string name="limitMileage">Limit Mileage</string>
+    <string name="Trunk_Width">Trunk Width</string>
+    <string name="Trunk_Height">Trunk Height</string>
+    <string name="Number_Of_Seats">Number Of Seats</string>
+    <string name="Air_Conditioning">Air Conditioning</string>
+    <string name="Safety_System">Safety System</string>
+    <string name="Pullution_Level">Pullution Level</string>
+    <string name="Add_User">Add User</string>
+    <string name="First_Name">First Name</string>
+    <string name="Last_Name">Last Name</string>
+    <string name="ID">ID</string>
+    <string name="phone">Phone</string>
+    <string name="mail">e-mail</string>
+    <string name="Credit_Card">Credit Card</string>
+    <string name="passwordEx">********</string>
+    <string-array name="add_options">
+        <item>@string/add</item>
+        <item>@string/car</item>
+        <item>@string/model</item>
+        <item>@string/user</item>
+    </string-array>
 </resources>

@@ -4,6 +4,255 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/app_theme_yellow"
     tools:context="com.javaproject.malki.projectstepone.controller.AddModel">
+    <LinearLayout
+        android:layout_width="355dp"
+        android:layout_height="478dp"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="17dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/headlineAddModel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/addModel"
+            android:textSize="60dp"
+            android:textAlignment="center"
+            android:textColor="@color/app_theme_dark_red"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="3"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/company"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/model"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/modelType"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/color"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/engine_volume"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/gear"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/limitMileage"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/Trunk_Width"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/Trunk_Height"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/Number_Of_Seats"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/Air_Conditioning"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/Safety_System"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/Pullution_Level"
+                    android:textSize="20dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <Spinner
+                    android:id="@+id/enterCompany"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+
+                    android:textSize="20dp"/>
+
+                <Spinner
+                    android:id="@+id/enterModel"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:textSize="20dp" />
+
+                <Spinner
+                    android:id="@+id/enterModelType"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/modelType"
+                    android:textSize="20dp" />
+
+                <Spinner
+                    android:id="@+id/enterColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/color"
+                    android:textSize="20dp" />
+
+                <NumberPicker
+                    android:id="@+id/enterVolume"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1" />
+
+                <Switch
+                    android:id="@+id/isGear"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:padding="70dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <Switch
+                        android:id="@+id/isMileage"
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        />
+                    <!--if the switch is on the number picker is visible-->
+                    <NumberPicker
+                        android:id="@+id/enterMileage"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/enterTrunkWidth"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:inputType="number" />
+
+                <EditText
+                    android:id="@+id/enterTrunkHeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:inputType="number" />
+
+                <NumberPicker
+                    android:id="@+id/enterSeats"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:text="@string/Number_Of_Seats"
+                    android:textSize="20dp" />
+
+                <RadioButton
+                    android:id="@+id/isAir"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_gravity="center"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <Switch
+                        android:id="@+id/isSafety"
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        />
+                    <!--if the switch is on the number picker is visible-->
+                    <Spinner
+                        android:id="@+id/systemType"
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:spinnerMode="dialog"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <SeekBar
+                    android:id="@+id/pollutionLevel"
+                    style="@android:style/Widget.SeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dip"
+                    android:layout_weight="1"
+                    android:max="15"
+                    android:min="1"
+                    android:thumb="@color/app_theme_dark_red"></SeekBar>
+
+            </LinearLayout>
+        </LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="0dip"
+            android:layout_weight="0.5"
+            android:layout_gravity="center"
+            android:background="@drawable/buttonshape"
+            android:text="@string/add"
+            android:textColor="@color/app_theme_gray"
+            android:textStyle="bold"
+            android:gravity="center"/>
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

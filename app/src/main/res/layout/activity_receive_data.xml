@@ -4,6 +4,83 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/app_theme_yellow"
     tools:context="com.javaproject.malki.projectstepone.controller.ReceiveData">
 
+    <TextView
+        android:id="@+id/labelSearch"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:text="@string/search"
+        android:textAlignment="center"
+        android:textColor="@color/app_theme_dark_red"
+        android:textSize="30dp"
+        android:textStyle="bold"
+
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="79dp" />
+
+    <LinearLayout
+        android:layout_width="368dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="200dp">
+
+        <AutoCompleteTextView
+            android:id="@+id/searchItems"
+            android:layout_width="368dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/search"
+            android:textAlignment="center"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/filterSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/checkbox_car"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/car" />
+
+            <CheckBox
+                android:id="@+id/checkbox_model"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/model" />
+
+            <CheckBox
+                android:id="@+id/checkbox_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/user" />
+
+            <CheckBox
+                android:id="@+id/checkbox_branch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/branch" />
+
+            <CheckBox
+                android:id="@+id/checkbox_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/order" />
+        </LinearLayout>
+        <!--TODO ask oshri-->
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

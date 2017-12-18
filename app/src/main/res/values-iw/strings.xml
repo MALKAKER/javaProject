@@ -5,4 +5,45 @@
     <string name = "password">סיסמא</string>
     <string name = "register">הרשם/הרשמי</string>
     <string name = "log_in">הכנס/הכנסי</string>
+    <string name="driver">נהג/ת</string>
+    <string name="employee">עובד/ת</string>
+    <string name="add">הוסף/הוסיפי</string>
+    <string name="search">חפש/חפשי</string>
+    <string name="car">רכב</string>
+    <string name="model">דגם</string>
+    <string name="user">משתמש</string>
+    <string name="branch">סניף</string>
+    <string name="order">הזמנה</string>
+    <string name="addCar">הוסף מכונית</string>
+    <string name="locNumber">Location Number</string>
+    <string name="mileage">קילומטראג</string>
+    <string name="fuel">דלק</string>
+    <string name="addModel">הוסף דגם</string>
+    <string name="licensePlate">License Plate</string>
+    <string name="company">Company</string>
+    <string name="modelType">Model Type</string>
+    <string name="color">Color</string>
+    <string name="engine_volume">Engeen Volume</string>
+    <string name="gear">Gear</string>
+    <string name="limitMileage">Limit Mileage</string>
+    <string name="Trunk_Width">Trunk Width</string>
+    <string name="Trunk_Height">Trunk Height</string>
+    <string name="Number_Of_Seats">Number Of Seats</string>
+    <string name="Air_Conditioning">Air Conditioning</string>
+    <string name="Safety_System">Safety System</string>
+    <string name="Pullution_Level">Pullution Level</string>
+    <string name="Add_User">Add User</string>
+    <string name="First_Name">First Name</string>
+    <string name="Last_Name">Last Name</string>
+    <string name="ID">ID</string>
+    <string name="phone">Phone</string>
+    <string name="mail">e-mail</string>
+    <string name="Credit_Card">Credit Card</string>
+    <string name="passwordEx">********</string>
+    <string-array name="add_options">
+        <item>@string/add</item>
+        <item>@string/car</item>
+        <item>@string/model</item>
+        <item>@string/user</item>
+    </string-array>
 </resources>

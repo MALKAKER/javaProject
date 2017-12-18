@@ -4,6 +4,161 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/app_theme_yellow"
     tools:context="com.javaproject.malki.projectstepone.controller.AddCar">
+<LinearLayout
+    android:layout_width="352dp"
+    android:layout_height="480dp"
+    android:orientation="vertical"
+    tools:layout_editor_absoluteY="10dp"
+    tools:layout_editor_absoluteX="17dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
+    <TextView
+        android:id="@+id/headlineAddCar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/addCar"
+        android:textSize="80dp"
+        android:textAlignment="center"
+        android:textColor="@color/app_theme_dark_red"/>
+    <LinearLayout
+        android:id="@+id/enterLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/LabelLocationNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_weight="50"
+            android:text="@string/locNumber"
+            android:textSize="20dp"/>
 
+        <Spinner
+            android:id="@+id/locationNumber"
+            android:layout_width="245dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:autofillHints="@string/locNumber"
+            android:clickable="true"
+            android:gravity="right"
+            android:spinnerMode="dialog" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/enterModel"
+        android:layout_width="wrap_content"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/LabelModelType"
+            android:layout_width="124dp"
+            android:layout_height="match_parent"
+            android:gravity="left"
+            android:text="@string/model"
+            android:textSize="20dp"
+             />
+
+        <Spinner
+            android:id="@+id/getModel"
+            android:layout_width="245dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:autofillHints="@string/locNumber"
+            android:clickable="true"
+            android:gravity="right"
+            android:spinnerMode="dialog" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/enterLicense"
+        android:layout_width="wrap_content"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/LabelLicensePlate"
+            android:layout_width="124dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="@string/licensePlate"
+            android:textSize="20dp"
+             />
+        <EditText
+            android:layout_width="245dp"
+            android:layout_height="match_parent"
+            android:hint="@string/licensePlate"
+            android:inputType="number"
+            android:minEms="8"
+            android:maxEms="8"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/EnterKilometerAndFuel"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/enterMileage"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mileage"
+                android:textSize="20dp" />
+
+            <NumberPicker
+                android:id="@+id/numberPicker1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/EnterFuelAmount"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fuel"
+                android:textSize="20dp"
+                android:textAlignment="center"/>
+
+            <SeekBar
+                android:id="@+id/fuelAmount"
+                style="@android:style/Widget.SeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="26dp"
+                android:max="100"
+                android:min="0"
+                android:thumb="@color/app_theme_dark_red"></SeekBar>
+        </LinearLayout>
+    </LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="0dip"
+        android:layout_weight="0.5"
+        android:layout_gravity="center"
+        android:background="@drawable/buttonshape"
+        android:text="@string/add"
+        android:textColor="@color/app_theme_gray"
+        android:textStyle="bold"
+        android:gravity="center"/>
+</LinearLayout>
 </android.support.constraint.ConstraintLayout>
