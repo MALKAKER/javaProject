@@ -9,11 +9,16 @@ import com.javaproject.malki.projectstepone.model.DataSource.List_DB;
  */
 
 public class DbManagerFactory {
-    private final DbManagerFactory factory = new DbManagerFactory();
-    public DB_Manager DbType()
-    {
+
+
         //here the type of the DB , if the type is changed,
         //the developer needs only to change that line
-        return new ListDbManager();
+        static DB_Manager manager = null;
+
+        public static DB_Manager getManager() {
+        if (manager == null)
+            manager = new ListDbManager();
+        return manager;
+
     }
 }

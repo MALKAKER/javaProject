@@ -23,10 +23,16 @@ public interface DB_Manager {
     public boolean ModelExist(String ID);
     //Check if the car is already exist in the data base
     public boolean CarExist(String ID);
+    //Check if the branch is already exist in the data base
+    public boolean BranchExist(String ID);
     //Check if the user is already exist in the data base and return the object
     public Client GetClient(String ID) throws Exception;
     //Check if the car-model is already exist in the data base and return the object
     public CarModel GetModel(String ID) throws Exception;
+    //Check if the Order is already exist in the data base and return the object
+    public Order GetOrder(String ID) throws Exception;
+    //Check if the branch is already exist in the data base and return the object
+    public Branch GetBranch(String ID) throws Exception;
     //Check if the car is already exist in the data base and return the object
     public Car GetCar(String ID) throws Exception;
     //Add client to data base

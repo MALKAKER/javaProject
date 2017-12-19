@@ -21,7 +21,8 @@
         <activity android:name=".controller.ReceiveData" />
         <activity android:name=".controller.AddCar" />
         <activity android:name=".controller.AddModel" />
-        <activity android:name=".controller.AddUser"></activity>
+        <activity android:name=".controller.AddUser" />
+        <activity android:name=".controller.Register"></activity>
     </application>
 
 </manifest>

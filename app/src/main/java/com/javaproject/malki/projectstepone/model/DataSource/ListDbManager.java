@@ -18,9 +18,11 @@ import static com.javaproject.malki.projectstepone.model.DataSource.List_DB.carM
 import static com.javaproject.malki.projectstepone.model.DataSource.List_DB.cars;
 import static com.javaproject.malki.projectstepone.model.DataSource.List_DB.clients;
 import static com.javaproject.malki.projectstepone.model.DataSource.List_DB.orders;
+import static com.javaproject.malki.projectstepone.model.backend.ConstCars.ContentValuesToBranch;
 import static com.javaproject.malki.projectstepone.model.backend.ConstCars.ContentValuesToCar;
 import static com.javaproject.malki.projectstepone.model.backend.ConstCars.ContentValuesToCarModel;
 import static com.javaproject.malki.projectstepone.model.backend.ConstCars.ContentValuesToClient;
+import static com.javaproject.malki.projectstepone.model.backend.ConstCars.ContentValuesToOrder;
 
 /**
  * the class manage data's storage and retrievement
@@ -35,7 +37,7 @@ public class ListDbManager implements DB_Manager{
     @Override
     public boolean ClientExist(String ID) {
         for (Client c:List_DB.clients) {
-            if(c.getClientID() == ID)
+            if(c.getClientID().equals(ID))
             {
                 return true;
             }
@@ -48,7 +50,7 @@ public class ListDbManager implements DB_Manager{
     @Override
     public boolean ModelExist(String details) {
         for (CarModel c:List_DB.carModels) {
-            if(c.toString() == details)
+            if(c.toString().equals(details))
             {
                 return true;
             }
@@ -62,7 +64,18 @@ public class ListDbManager implements DB_Manager{
     @Override
     public boolean CarExist(String newLicencePlate) {
         for (Car c:List_DB.cars) {
-            if(c.toString() == newLicencePlate)
+            if(c.toString().equals(newLicencePlate))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean BranchExist(String ID) {
+        for (Branch b:List_DB.branches) {
+            if(b.toString().equals(ID))
             {
                 return true;
             }
@@ -73,7 +86,7 @@ public class ListDbManager implements DB_Manager{
     @Override
     public Client GetClient(String ID) throws Exception {
         for (Client c:List_DB.clients) {
-            if(c.getClientID() == ID)
+            if(c.getClientID().equals(ID))
             {
                 return c;
             }
@@ -84,7 +97,7 @@ public class ListDbManager implements DB_Manager{
     @Override
     public CarModel GetModel(String details) throws Exception {
         for (CarModel c:List_DB.carModels) {
-            if(c.toString() == details)
+            if(c.toString().equals(details))
             {
                 return c;
             }
@@ -95,7 +108,7 @@ public class ListDbManager implements DB_Manager{
     @Override
     public Car GetCar(String newLicencePlate) throws Exception {
         for (Car c:List_DB.cars) {
-            if(c.toString() == newLicencePlate)
+            if(c.toString().equals(newLicencePlate))
             {
                 return c;
             }
@@ -103,21 +116,46 @@ public class ListDbManager implements DB_Manager{
         throw new Exception("ERROR: The car doesn't exist!\n");
     }
 
+    @Override
+    public Branch GetBranch(String ID) throws Exception {
+        for (Branch b:List_DB.branches) {
+            if(b.toString().equals(ID))
+            {
+                return b;
+            }
+        }
+        throw new Exception("ERROR: The branch doesn't exist!\n");
+    }
+
+    @Override
+    public Order GetOrder(String ID) throws Exception {
+        for (Order o:List_DB.orders) {
+            if(o.toString().equals(ID))
+            {
+                return o;
+            }
+        }
+        throw new Exception("ERROR: The order doesn't exist!\n");
+    }
+
     /*
-    * AddClient: adds client to list
-    * */
+            * AddClient: adds client to list
+            * */
     @Override
     public String AddClient(ContentValues newClient) throws Exception {
+        String user = null;
         if(!ClientExist(newClient.getAsString(ConstCars.ClientConst.CLIENT_ID)))
         {
             Client client = ContentValuesToClient(newClient);
+            user = (String)newClient.get(ConstCars.ClientConst.CLIENT_ID);
+            client.setUserName(user);
             (List_DB.clients).add(client);
         }
         else
         {
             throw new Exception("ERROR: This client is already exist in the DB.\n");
         }
-        return null;
+        return user;
     }
     /*
     * AddModel: adds model to list
@@ -133,7 +171,7 @@ public class ListDbManager implements DB_Manager{
         {
             throw new Exception("ERROR: This car-model is already exist in the DB.\n");
         }
-        return null;
+        return (String) carModel.get(ConstCars.CarModelConst.MODEL_NAME);
     }
 
     @Override
@@ -147,17 +185,35 @@ public class ListDbManager implements DB_Manager{
         {
             throw new Exception("ERROR: That car is already exist in the DB.\n");
         }
-        return null;
+        return (String) car.get(ConstCars.CarConst.LICENCE_NUMBER);
     }
 
     @Override
     public String AddOrder(ContentValues order) throws Exception {
-        return null;
+        if (ClientExist((String)order.get(ConstCars.OrderConst.CLIENT_NUMBER)))
+        {
+            Order o = ContentValuesToOrder(order);
+            List_DB.orders.add(o);
+        }
+        else
+        {
+            throw new Exception("ERROR: You are not registered in our system\nPlease register first.\n");
+        }
+        return (String) order.get(ConstCars.OrderConst.ORDER_NUMBER);
     }
 
     @Override
     public String AddBranch(ContentValues branch) throws Exception {
-        return null;
+        if(!BranchExist((String)branch.get(ConstCars.BranchConst.BRANCH_NUMBER)))
+        {
+            Branch b = ContentValuesToBranch(branch);
+            List_DB.branches.add(b);
+        }
+        else
+        {
+            throw new Exception("ERROR: Branch is already exist!\n");
+        }
+        return (String) branch.get( ConstCars.BranchConst.BRANCH_NUMBER);
     }
 
     @Override
@@ -169,7 +225,7 @@ public class ListDbManager implements DB_Manager{
         int index ;
         for (index = 0; index < fuelLevel.length; index++)
         {
-            if(fuelLevel[index] == car.getFuelMode()){break;}
+            if(fuelLevel[index].equals(car.getFuelMode())){break;}
         }
         //over 22 liter the fuel level decreases in one degree - to ask the lecturer what to do
         //if the client waste a lot fuel and fill the cell by himself- maybe add a field:(
