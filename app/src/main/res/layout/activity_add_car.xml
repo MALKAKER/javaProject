@@ -86,14 +86,15 @@
             android:text="@string/licensePlate"
             android:textSize="20dp"
              />
+
         <EditText
+            android:id="@+id/GetLicenceNumber"
             android:layout_width="245dp"
             android:layout_height="match_parent"
             android:hint="@string/licensePlate"
             android:inputType="number"
-            android:minEms="8"
             android:maxEms="8"
-            />
+            android:minEms="8" />
 
     </LinearLayout>
     <LinearLayout
@@ -116,13 +117,12 @@
                 android:text="@string/mileage"
                 android:textSize="20dp" />
 
-            <NumberPicker
-                android:id="@+id/numberPicker1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:gravity="center" />
+            <EditText
+                android:id="@+id/MileageCounter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:inputType="number" />
         </LinearLayout>
 
         <LinearLayout
@@ -150,15 +150,17 @@
                 android:thumb="@color/app_theme_dark_red"></SeekBar>
         </LinearLayout>
     </LinearLayout>
+
     <Button
+        android:id="@+id/addCar"
         android:layout_width="wrap_content"
         android:layout_height="0dip"
-        android:layout_weight="0.5"
         android:layout_gravity="center"
+        android:layout_weight="0.5"
         android:background="@drawable/buttonshape"
+        android:gravity="center"
         android:text="@string/add"
         android:textColor="@color/app_theme_gray"
-        android:textStyle="bold"
-        android:gravity="center"/>
+        android:textStyle="bold" />
 </LinearLayout>
 </android.support.constraint.ConstraintLayout>

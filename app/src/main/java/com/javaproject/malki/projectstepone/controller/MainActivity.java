@@ -25,6 +25,8 @@ import com.javaproject.malki.projectstepone.model.entities.ENUMS;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.javaproject.malki.projectstepone.controller.ConstValues.USER_ID_KEY;
+
 public class MainActivity extends Activity implements View.OnClickListener {
     private Button register;
     private Button signIn;
@@ -39,7 +41,62 @@ public class MainActivity extends Activity implements View.OnClickListener {
         register.setOnClickListener(this);
         signIn.setOnClickListener(this);
     }
+    
+    private void initiation() throws Exception {
+        ContentValues address1 = new ContentValues();
+        address1.put(ConstCars.AddressConst.CITY, "Beitar");
+        address1.put(ConstCars.AddressConst.COUNTRY, ENUMS.COUNTRY.IL.toString());
+        address1.put(ConstCars.AddressConst.HOUSE, 4);
 
+
+        ContentValues client1 = new ContentValues();
+        client1.put(ConstCars.ClientConst.CLIENT_ID, "316301191");
+        client1.put(ConstCars.ClientConst.EMAIL, "A@gmail.com");
+        client1.put(ConstCars.ClientConst.CREDIT_CARD, "1223456789");
+        client1.put(ConstCars.ClientConst.FIRST_NAME, "A");
+        client1.put(ConstCars.ClientConst.LAST_NAME, "AA");
+        client1.put(ConstCars.ClientConst.PASSWORD, "malki1996");
+        client1.put(ConstCars.ClientConst.PHONE_NUMBER, "0545337060");
+        client1.put(ConstCars.ClientConst.USER_NAME, "");
+        DbManagerFactory.getManager().AddClient(client1);
+        ContentValues model1 = new ContentValues();
+        model1.put(ConstCars.CarModelConst.MODEL_NAME, "lantis");
+        model1.put(ConstCars.CarModelConst.MODEL, "ERF123");
+        model1.put(ConstCars.CarModelConst.AIR_CONDITIONER, Boolean.TRUE);
+        model1.put(ConstCars.CarModelConst.CAR_COLOR, ENUMS.COLORS.Black.toString());
+        model1.put(ConstCars.CarModelConst.CAR_COMPANY, ENUMS.COMPANY.Mazda.toString());
+        model1.put(ConstCars.CarModelConst.ENGINE_VOL, "4");
+        model1.put(ConstCars.CarModelConst.IS_GEAR, Boolean.TRUE);
+        model1.put(ConstCars.CarModelConst.IS_LIMIT, Boolean.TRUE);
+        model1.put(ConstCars.CarModelConst.IS_SAFETY, Boolean.TRUE);
+        model1.put(ConstCars.CarModelConst.MILEAGE_NUMBER, 40000);
+        model1.put(ConstCars.CarModelConst.NUMBER_OF_SEATS, 5);
+        model1.put(ConstCars.CarModelConst.POLLUTION_LEVEL, 8);
+        model1.put(ConstCars.CarModelConst.TRUNK_HEIGHT ,0.4);
+        model1.put(ConstCars.CarModelConst.TRUNK_WIDTH, 1);
+        model1.put(ConstCars.CarModelConst.SAFETY_TYPE, ENUMS.SAFETY.Mobileye.toString());
+        DbManagerFactory.getManager().AddModel(model1);
+        ContentValues branch1 = new ContentValues();
+        branch1.put(ConstCars.BranchConst.BRANCH_NUMBER, 12345678);
+        branch1.put(ConstCars.BranchConst.BRANCH_ADDRESS, String.valueOf(address1.valueSet()));
+        branch1.put(ConstCars.BranchConst.PARKING_SPACE, 5);
+        DbManagerFactory.getManager().AddBranch(branch1);
+        ContentValues car1 = new ContentValues();
+        car1.put(ConstCars.CarConst.LICENCE_NUMBER, "12345678");
+        car1.put(ConstCars.CarConst.FUEL, ENUMS.FUEL_MODE.Full.toString());
+        car1.put(ConstCars.CarConst.LOCATION_NUMBER, "12345678");
+        car1.put(ConstCars.CarConst.MODEL_TYPE, "ERF123");
+        car1.put(ConstCars.CarConst.MILEAGE, "12345678");
+        DbManagerFactory.getManager().AddCar(car1);
+        ContentValues car2 = new ContentValues();
+        car2.put(ConstCars.CarConst.LICENCE_NUMBER, "87654321");
+        car2.put(ConstCars.CarConst.FUEL, ENUMS.FUEL_MODE.Full.toString());
+        car2.put(ConstCars.CarConst.LOCATION_NUMBER, "12345678");
+        car2.put(ConstCars.CarConst.MODEL_TYPE, "ERF123");
+        car2.put(ConstCars.CarConst.MILEAGE, "100000");
+        DbManagerFactory.getManager().AddCar(car2);
+
+    }
     /*
     * CheckPassword - Checks if the password is correct
     * returns true if the user name and the password are correct
@@ -76,8 +133,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
             else if (CheckPassword(user, pass)){
                 Intent intent = new Intent(this,chooseUserType.class);
                 //send the user name to the next activity
-                intent.putExtra(getString(R.string.extra_user),user);
-                Toast.makeText(getApplicationContext(),R.string.welcome,Toast.LENGTH_SHORT).show();
+                intent.putExtra(USER_ID_KEY,user);
+                Toast.makeText(getApplicationContext(),getString(R.string.welcome) +" " +
+                        DbManagerFactory.getManager().GetClient(user).getFirstName(),Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         }
@@ -113,6 +171,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findViews();
+        try {
+            initiation();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -128,13 +191,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     }
 }
-/*CarModel carmodel = new CarModel("lantis", ENUMS.COMPANY.Mazda,"test", 40, ENUMS.COLORS.Black , true, false, (short) 4,5,5,true,true,14);
-            Car car = new Car(1,"lantis",1000,"I5PEQLNP");
-            Address address = new Address("BEITAR", ENUMS.COUNTRY.IL,9,5);
-            Branch branch = new Branch(address,5,78999);
-            ContentValues cv = ConstCars.BranchToContentValues(branch);
-            Branch newB = ConstCars.ContentValuesToBranch(cv);
-            int g = 0;*/
+
 //DbManagerFactory dmf = new DbManagerFactory();
 //this.dbManager = dmf.DbType();
 //tmp[] f = tmp.values();

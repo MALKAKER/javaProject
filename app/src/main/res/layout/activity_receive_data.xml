@@ -7,30 +7,32 @@
     android:background="@color/app_theme_yellow"
     tools:context="com.javaproject.malki.projectstepone.controller.ReceiveData">
 
-    <TextView
-        android:id="@+id/labelSearch"
-        android:layout_width="368dp"
-        android:layout_height="wrap_content"
-        android:text="@string/search"
-        android:textAlignment="center"
-        android:textColor="@color/app_theme_dark_red"
-        android:textSize="30dp"
-        android:textStyle="bold"
 
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="79dp" />
 
     <LinearLayout
         android:layout_width="368dp"
-        android:layout_height="0dp"
+        android:layout_height="495dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="200dp">
+        tools:layout_editor_absoluteY="8dp">
+        <TextView
+            android:id="@+id/labelSearch"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:text="@string/search"
+            android:textAlignment="center"
+            android:textColor="@color/app_theme_dark_red"
+            android:textSize="40dp"
+            android:textStyle="bold"
 
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="79dp" />
         <AutoCompleteTextView
             android:id="@+id/searchItems"
-            android:layout_width="368dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
             android:hint="@string/search"
             android:textAlignment="center"
             tools:layout_editor_absoluteX="8dp"
@@ -39,7 +41,8 @@
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/filterSearch"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
             android:layout_gravity="center"
             android:orientation="horizontal">
 
@@ -78,9 +81,24 @@
                 android:onClick="onCheckboxClicked"
                 android:text="@string/order" />
         </LinearLayout>
-        <!--TODO ask oshri-->
-        <ListView
+        <Button
+            android:id="@+id/searchButton"
             android:layout_width="wrap_content"
-            android:layout_height="10dp" />
-    </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:background="@color/app_theme_gray"
+            android:text="@string/search"
+            android:textColor="@color/app_theme_dark_red"
+            android:textSize="20dp"/>
+        <!--TODO ask oshri-->
+        <ScrollView
+            android:id="@+id/scrollResults"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="4">
+
+            <include layout="@layout/result_presentation" />
+        </ScrollView>
+
+    </LinearLayout></android.support.constraint.ConstraintLayout>

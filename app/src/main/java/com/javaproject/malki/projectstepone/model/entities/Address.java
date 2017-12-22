@@ -9,14 +9,14 @@ public class Address {
     private String city;
     private ENUMS.COUNTRY country;
     private int house;
-    private int door;
+
 
     //constructor
-    public Address(String city, ENUMS.COUNTRY country, int house, int door) throws Exception{
+    public Address(String city, ENUMS.COUNTRY country, int house) throws Exception{
         this.setCity(city);
         this.setCountry(country);
         this.setHouse(house);
-        this.setDoor(door);
+
     }
     //copy constructor
     public Address(Address branchAddress) throws Exception
@@ -24,7 +24,7 @@ public class Address {
         this.setCity(branchAddress.city);
         this.setCountry(branchAddress.country);
         this.setHouse(branchAddress.house);
-        this.setDoor(branchAddress.door);
+
     }
 
     public Address() {
@@ -61,17 +61,9 @@ public class Address {
     }
 
 
-    public int getDoor() {
-        return door;
-    }
 
-    public void setDoor(int door) throws Exception{
-        if (door < 1)
-        {
-            throw new Exception("invalid value!");
-        }
-        this.door = door;
-    }
+
+
     @Override
     public String toString() {
         return String.format("%s, %s, %d",this.country, this.city, this.house);

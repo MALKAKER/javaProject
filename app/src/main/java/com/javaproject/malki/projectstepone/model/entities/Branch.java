@@ -59,7 +59,9 @@ public class Branch
     //get and set
 
     @Override
-    public String toString() {
-        return branchAddress.toString();
+    public String toString()
+    {
+        String s = String.format("Number: %s\nAddress: %s\nAvailable Parking Space: %d",branchNumber,branchAddress.toString(), parkingSpace );
+        return s;
     }
 }

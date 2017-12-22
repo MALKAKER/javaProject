@@ -26,7 +26,6 @@ public class ConstCars {
         public static String CITY = "city";
         public static String COUNTRY ="country";
         public static String HOUSE = "house";
-        public static String DOOR = "door";
     }
     public static class BranchConst
     {
@@ -92,7 +91,6 @@ public class ConstCars {
         cv.put(AddressConst.CITY, address.getCity());
         cv.put(AddressConst.COUNTRY, String.valueOf(address.getCountry()));//what is value of?
         cv.put(AddressConst.HOUSE, address.getHouse());
-        cv.put(AddressConst.DOOR, address.getDoor());
         return cv;
     }
     public static ContentValues BranchToContentValues (Branch branch)
@@ -168,13 +166,12 @@ public class ConstCars {
         address.setCity(cv.getAsString(AddressConst.CITY));
         address.setCountry(ENUMS.COUNTRY.valueOf(cv.getAsString(AddressConst.COUNTRY)));
         address.setHouse(cv.getAsInteger(AddressConst.HOUSE));
-        address.setDoor(cv.getAsInteger(AddressConst.DOOR));
         return  address;
     }
     public static  Branch ContentValuesToBranch(ContentValues cv) throws Exception {
         Branch branch = new Branch();
         String[] s = (cv.getAsString(BranchConst.BRANCH_ADDRESS).replaceAll("]","")).split(",");
-        Address address = new Address(s[2].split("=")[1],ENUMS.COUNTRY.valueOf(s[0].split("=")[1]),Integer.parseInt(s[3].split("=")[1]),Integer.parseInt(s[1].split("=")[1]));
+        Address address = new Address(s[1].split("=")[1],ENUMS.COUNTRY.valueOf(s[0].split("=")[1]),Integer.parseInt(s[2].split("=")[1]));
         branch.setBranchAddress(address);//!
         branch.setParkingSpace(cv.getAsInteger(BranchConst.PARKING_SPACE));
         branch.setBranchNumber(cv.getAsLong(BranchConst.BRANCH_NUMBER));

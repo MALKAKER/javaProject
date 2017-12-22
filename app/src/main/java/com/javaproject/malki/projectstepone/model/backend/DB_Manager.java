@@ -24,15 +24,15 @@ public interface DB_Manager {
     //Check if the car is already exist in the data base
     public boolean CarExist(String ID);
     //Check if the branch is already exist in the data base
-    public boolean BranchExist(String ID);
+    public boolean BranchExist(int ID);
     //Check if the user is already exist in the data base and return the object
     public Client GetClient(String ID) throws Exception;
     //Check if the car-model is already exist in the data base and return the object
     public CarModel GetModel(String ID) throws Exception;
     //Check if the Order is already exist in the data base and return the object
-    public Order GetOrder(String ID) throws Exception;
+    public Order GetOrder(int ID) throws Exception;
     //Check if the branch is already exist in the data base and return the object
-    public Branch GetBranch(String ID) throws Exception;
+    public Branch GetBranch(int ID) throws Exception;
     //Check if the car is already exist in the data base and return the object
     public Car GetCar(String ID) throws Exception;
     //Add client to data base
@@ -56,7 +56,7 @@ public interface DB_Manager {
     public List<Branch> GetBranches();
     //todo extand methods that will retrieve the branches according to some criteria
     //Returns list of cars
-    public List<Car> GetCar();
+    public List<Car> GetCars();
     //todo extand methods that will retrieve the Cars according to some criteria
     //to some statistics - return all the orders
     public List<Order> GetOrders();

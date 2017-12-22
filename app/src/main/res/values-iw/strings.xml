@@ -44,11 +44,13 @@
     <string name="agreement">I Agree to the app temrs and restrictions</string>
     <string name="confirmPass">Confirm</string>
     <string name="Confirm_Password">Confirm Password</string>
-    <string name="extra_user">main.user.name</string>
     <string name="Enter_user_name">Enter user name</string>
     <string name="Enter_password_error">Enter password</string>
     <string name="Missing_field_Error">Missing field</string>
     <string name="Incorrect_password_Error">Incorrect password</string>
+    <string name="gearAuto">Auto</string>
+    <string name="gearHand">Hand</string>
+    <string name="The_car_successfully_added">The car successfully added</string>
     <string-array name="add_options">
         <item>@string/add</item>
         <item>@string/car</item>

@@ -125,6 +125,7 @@ public class Client
 
     @Override
     public String toString() {
-        return String.format("%s, %s", clientID ,userName);
+        return String.format("Name: %s %s\nID: %s\nPhone: %020d\nMail: %s\nUser: %s",
+                firstName, lastName, clientID, phoneNumber, email, userName );
     }
 }

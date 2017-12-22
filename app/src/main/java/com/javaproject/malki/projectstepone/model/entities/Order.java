@@ -163,6 +163,7 @@ public class Order
 
     @Override
     public String toString() {
-        return String.format("%d",orderNumber);
+        return String.format("User ID: %S\nLicence Plate: %s\nRent Duration: %tc - %tc\nOrder #: %d\n",
+                 clientNumber, carNumber, startRent, endRent, orderNumber);
     }
 }

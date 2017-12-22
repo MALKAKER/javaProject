@@ -209,7 +209,14 @@ public class CarModel {
     }
 
     @Override
-    public String toString() {
-        return String.format("%s, %s, %s", model, carCompany, modelName);
+    public String toString()
+    {
+        return String.format("Company: %s\nModel: %s\nModel #: %s\nColor: %s\nGear: %s\nNumber Of Seats: %d\n" +
+                        "Trunk Volume: %f\nAir Conditioning: %s\nSafety System: %s\n" +
+                        "Pollution Level: %d ",
+                carCompany.toString(), modelName, model, carColor.toString(), isGearBox==true? "Hand":"Auto",
+                numberOfSeats, trunkHeight*trunkWidth,
+                airConditioning? "Air Conditioner":"Non", isSafetySystem? getSafetyType().toString():"Non",
+                pollutionLevel);
     }
 }

@@ -78,15 +78,16 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dip"
-                    android:layout_weight="1"
+                    android:layout_weight="1.7"
                     android:text="@string/Trunk_Width"
                     android:textSize="20dp"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dip"
-                    android:layout_weight="1"
+                    android:layout_weight="1.7"
                     android:text="@string/Trunk_Height"
-                    android:textSize="20dp"/>
+                    android:textSize="20dp"
+                    />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dip"
@@ -153,13 +154,32 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dip"
                     android:layout_weight="1" />
-
-                <Switch
-                    android:id="@+id/isGear"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dip"
                     android:layout_weight="1"
-                    android:padding="70dp" />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/gearAuto"
+                        android:textAlignment="center"/>
+                    <Switch
+                        android:id="@+id/isGear"
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.7"
+                        android:gravity="center"
+                         />
+                    <TextView
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/gearHand"
+                        android:textAlignment="center"/>
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -170,7 +190,7 @@
                         android:id="@+id/isMileage"
                         android:layout_width="0dip"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="0.30"
                         />
                     <!--if the switch is on the number picker is visible-->
                     <NumberPicker
@@ -185,14 +205,16 @@
                     android:id="@+id/enterTrunkWidth"
                     android:layout_width="match_parent"
                     android:layout_height="0dip"
-                    android:layout_weight="1"
+                    android:layout_weight="1.7"
+                    android:hint="@string/Trunk_Width"
                     android:inputType="number" />
 
                 <EditText
                     android:id="@+id/enterTrunkHeight"
                     android:layout_width="match_parent"
                     android:layout_height="0dip"
-                    android:layout_weight="1"
+                    android:layout_weight="1.7"
+                    android:hint="@string/Trunk_Height"
                     android:inputType="number" />
 
                 <NumberPicker
@@ -205,7 +227,7 @@
 
                 <RadioButton
                     android:id="@+id/isAir"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="0dip"
                     android:layout_gravity="center"
                     android:layout_weight="1" />

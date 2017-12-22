@@ -39,8 +39,7 @@
             android:spinnerMode="dialog"
             android:entries="@array/add_options"
             android:theme="@style/spinnerTheme"
-            android:layout_below="@+id/receiveData"
-            android:clickable="true" />
+            android:layout_below="@+id/receiveData" />
     </RelativeLayout>
 
 

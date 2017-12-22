@@ -33,7 +33,7 @@ public class Car
     }
 
     public void setLicencePlate(String licencePlate) throws Exception {
-        if(licencePlate.length() != 7 || licencePlate.length() != 8)
+        if(licencePlate.length() < 7 || licencePlate.length() > 8)
         {
             throw new Exception("ERROR: Israeli licence plates have only 7 or 8 figures!\n");
         }
@@ -90,6 +90,8 @@ public class Car
 
     @Override
     public String toString() {
-        return licencePlate;
+        String s = String.format("Model: %s\nLocation: %s\nMileage: %f\nLicense Plate: %s\n Fuel Mode: %s",
+                 getModelType(),getLocationNumber(), getMileage(), getLicencePlate(), getFuelMode().toString());
+        return s;
     }
 }

@@ -109,7 +109,7 @@ public class Register extends Activity implements View.OnClickListener{
         {
             Intent intent = new Intent(this,chooseUserType.class);
             //send the user name to the next activity
-            intent.putExtra(getString(R.string.extra_user),user);
+            intent.putExtra(ConstValues.USER_ID_KEY,user);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             Toast.makeText(getApplicationContext(),R.string.welcome,Toast.LENGTH_SHORT).show();
             startActivity(intent);

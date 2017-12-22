@@ -50,7 +50,7 @@ public class ListDbManager implements DB_Manager{
     @Override
     public boolean ModelExist(String details) {
         for (CarModel c:List_DB.carModels) {
-            if(c.toString().equals(details))
+            if(c.getModel().equals(details))
             {
                 return true;
             }
@@ -64,7 +64,7 @@ public class ListDbManager implements DB_Manager{
     @Override
     public boolean CarExist(String newLicencePlate) {
         for (Car c:List_DB.cars) {
-            if(c.toString().equals(newLicencePlate))
+            if(c.getLicencePlate().equals(newLicencePlate))
             {
                 return true;
             }
@@ -73,9 +73,9 @@ public class ListDbManager implements DB_Manager{
     }
 
     @Override
-    public boolean BranchExist(String ID) {
+    public boolean BranchExist(int ID) {
         for (Branch b:List_DB.branches) {
-            if(b.toString().equals(ID))
+            if(b.getBranchNumber()==(ID))
             {
                 return true;
             }
@@ -97,7 +97,7 @@ public class ListDbManager implements DB_Manager{
     @Override
     public CarModel GetModel(String details) throws Exception {
         for (CarModel c:List_DB.carModels) {
-            if(c.toString().equals(details))
+            if(c.getModel().equals(details))
             {
                 return c;
             }
@@ -108,7 +108,7 @@ public class ListDbManager implements DB_Manager{
     @Override
     public Car GetCar(String newLicencePlate) throws Exception {
         for (Car c:List_DB.cars) {
-            if(c.toString().equals(newLicencePlate))
+            if(c.getLicencePlate().equals(newLicencePlate))
             {
                 return c;
             }
@@ -117,9 +117,9 @@ public class ListDbManager implements DB_Manager{
     }
 
     @Override
-    public Branch GetBranch(String ID) throws Exception {
+    public Branch GetBranch(int ID) throws Exception {
         for (Branch b:List_DB.branches) {
-            if(b.toString().equals(ID))
+            if(b.getBranchNumber() == (ID))
             {
                 return b;
             }
@@ -128,9 +128,9 @@ public class ListDbManager implements DB_Manager{
     }
 
     @Override
-    public Order GetOrder(String ID) throws Exception {
+    public Order GetOrder(int ID) throws Exception {
         for (Order o:List_DB.orders) {
-            if(o.toString().equals(ID))
+            if(o.getOrderNumber() == (ID))
             {
                 return o;
             }
@@ -204,7 +204,7 @@ public class ListDbManager implements DB_Manager{
 
     @Override
     public String AddBranch(ContentValues branch) throws Exception {
-        if(!BranchExist((String)branch.get(ConstCars.BranchConst.BRANCH_NUMBER)))
+        if(!BranchExist(branch.getAsInteger(ConstCars.BranchConst.BRANCH_NUMBER)))
         {
             Branch b = ContentValuesToBranch(branch);
             List_DB.branches.add(b);
@@ -213,7 +213,7 @@ public class ListDbManager implements DB_Manager{
         {
             throw new Exception("ERROR: Branch is already exist!\n");
         }
-        return (String) branch.get( ConstCars.BranchConst.BRANCH_NUMBER);
+        return branch.getAsLong( ConstCars.BranchConst.BRANCH_NUMBER).toString();
     }
 
     @Override
@@ -262,7 +262,7 @@ public class ListDbManager implements DB_Manager{
     * GetCar() retrieve all cars are existed in the system
     * */
     @Override
-    public List<Car> GetCar() {
+    public List<Car> GetCars() {
         return cars;
     }
     /*
