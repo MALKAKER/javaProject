@@ -177,7 +177,7 @@ public class CarModel {
 
     public void setMileageNumber(int mileageNumber) throws Exception {
         ErrorValue(mileageNumber);
-        this.mileageNumber = isLimitMileage ? mileageNumber : null;
+        this.mileageNumber = isLimitMileage ? mileageNumber : 0;
     }
 
     public boolean isSafetySystem() {

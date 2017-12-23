@@ -162,7 +162,7 @@ public class ListDbManager implements DB_Manager{
     * */
     @Override
     public String AddModel(ContentValues carModel) throws Exception {
-        if(!ModelExist(carModel.toString()))
+        if(!ModelExist(carModel.getAsString(ConstCars.CarModelConst.MODEL)))
         {
             CarModel model = ContentValuesToCarModel(carModel);
             (List_DB.carModels).add(model);

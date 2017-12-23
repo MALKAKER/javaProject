@@ -51,6 +51,9 @@
     <string name="gearAuto">Auto</string>
     <string name="gearHand">Hand</string>
     <string name="The_car_successfully_added">The car successfully added</string>
+    <string name="WARNING_This_model_harms_the_environment">WARNING: This model harms the environment!</string>
+    <string name="The_model_successfully_added">The model successfully added</string>
+    <string name="Pollution_Level">Pollution Level:</string>
     <string-array name="add_options">
         <item>@string/add</item>
         <item>@string/car</item>
