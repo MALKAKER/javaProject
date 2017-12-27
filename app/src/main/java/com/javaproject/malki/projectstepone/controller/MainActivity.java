@@ -3,6 +3,7 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -46,6 +47,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         ContentValues address1 = new ContentValues();
         address1.put(ConstCars.AddressConst.CITY, "Beitar");
         address1.put(ConstCars.AddressConst.COUNTRY, ENUMS.COUNTRY.IL.toString());
+        address1.put(ConstCars.AddressConst.STREET, "Mutzafi");
         address1.put(ConstCars.AddressConst.HOUSE, 4);
 
 
@@ -78,7 +80,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         DbManagerFactory.getManager().AddModel(model1);
         ContentValues branch1 = new ContentValues();
         branch1.put(ConstCars.BranchConst.BRANCH_NUMBER, 12345678);
-        branch1.put(ConstCars.BranchConst.BRANCH_ADDRESS, String.valueOf(address1.valueSet()));
+        branch1.put(ConstCars.BranchConst.BRANCH_ADDRESS, ConstCars.ContentValuesToAddress(address1).toString());
         branch1.put(ConstCars.BranchConst.PARKING_SPACE, 5);
         DbManagerFactory.getManager().AddBranch(branch1);
         ContentValues car1 = new ContentValues();
@@ -101,15 +103,54 @@ public class MainActivity extends Activity implements View.OnClickListener {
     * CheckPassword - Checks if the password is correct
     * returns true if the user name and the password are correct
     * */
-    private Boolean CheckPassword(String name, String password1) throws Exception {
+    private void CheckPassword(final String name, final String password1) throws Exception {
+        new AsyncTask<Void, Void, Boolean>()
+        {
+            @Override
+            protected void onPostExecute(Boolean aBoolean) {
+                super.onPostExecute(aBoolean);
+                if(aBoolean)
+                {
+                    Intent intent = new Intent(getBaseContext(),chooseUserType.class);
+                    //send the user name to the next activity
+                    intent.putExtra(USER_ID_KEY,name);
+                    try {
+                        Toast.makeText(getApplicationContext(),getString(R.string.welcome) +" " +
+                                DbManagerFactory.getManager().GetClient(name).getFirstName(),Toast.LENGTH_SHORT).show();
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
+                    startActivity(intent);
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "Not a user", Toast.LENGTH_SHORT).show();
 
-            //get the user from the DB according to user name
-            Client c =DbManagerFactory.getManager().GetClient(name);
+                }
+
+            }
+
+            @Override
+            protected Boolean doInBackground(Void... params) {
+            Client c = null;
+            try {
+                c = DbManagerFactory.getManager().GetClient(name);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             //If the input password is not correct
-            if(!c.getPassword().equals(password1)|| c == null)
-                throw new Exception("Incorrect password or user-name");
-
-        return true;
+            if(c == null || !c.getPassword().equals(password1))
+                return false;
+            return true;
+            } }.execute();
+            //get the user from the DB according to user name
+            //Client c =DbManagerFactory.getManager().GetClient(name);
+            //If the input password is not correct
+//            if(!c.getPassword().equals(password1)|| c == null)
+//                throw new Exception("Incorrect password or user-name");
+        //if (b.)
+            //throw new Exception("Incorrect password or user-name");
+        //return b;
     }
     private void RegisterActivity()
     {
@@ -130,14 +171,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
             }
             //check if the password is correct
-            else if (CheckPassword(user, pass)){
-                Intent intent = new Intent(this,chooseUserType.class);
-                //send the user name to the next activity
-                intent.putExtra(USER_ID_KEY,user);
-                Toast.makeText(getApplicationContext(),getString(R.string.welcome) +" " +
-                        DbManagerFactory.getManager().GetClient(user).getFirstName(),Toast.LENGTH_SHORT).show();
-                startActivity(intent);
+            else
+            {
+               CheckPassword(user, pass);
             }
+             //   if (CheckPassword(user, pass)){
+//                Intent intent = new Intent(this,chooseUserType.class);
+//                //send the user name to the next activity
+//                intent.putExtra(USER_ID_KEY,user);
+//                Toast.makeText(getApplicationContext(),getString(R.string.welcome) +" " +
+//                        DbManagerFactory.getManager().GetClient(user).getFirstName(),Toast.LENGTH_SHORT).show();
+//                startActivity(intent);
+            //}
         }
         catch (Exception e)
         {

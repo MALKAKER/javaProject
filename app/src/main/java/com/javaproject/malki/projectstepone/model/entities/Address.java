@@ -8,13 +8,15 @@ package com.javaproject.malki.projectstepone.model.entities;
 public class Address {
     private String city;
     private ENUMS.COUNTRY country;
+    private String street;
     private int house;
 
 
     //constructor
-    public Address(String city, ENUMS.COUNTRY country, int house) throws Exception{
+    public Address(String city, ENUMS.COUNTRY country, String street, int house) throws Exception{
         this.setCity(city);
         this.setCountry(country);
+        this.setStreet(street);
         this.setHouse(house);
 
     }
@@ -23,6 +25,7 @@ public class Address {
     {
         this.setCity(branchAddress.city);
         this.setCountry(branchAddress.country);
+        this.setStreet(branchAddress.getStreet());
         this.setHouse(branchAddress.house);
 
     }
@@ -48,6 +51,14 @@ public class Address {
         this.country = country;
     }
 
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
     public int getHouse() {
         return house;
     }
@@ -66,7 +77,7 @@ public class Address {
 
     @Override
     public String toString() {
-        return String.format("%s, %s, %d",this.country, this.city, this.house);
+        return String.format("%s,%s,%s,%d",this.country, this.city, this.street, this.house);
     }
 
 }

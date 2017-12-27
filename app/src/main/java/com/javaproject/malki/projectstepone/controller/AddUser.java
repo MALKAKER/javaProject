@@ -3,6 +3,7 @@ package com.javaproject.malki.projectstepone.controller;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -68,7 +69,25 @@ public class AddUser extends Activity implements View.OnClickListener{
             contentValues.put(ConstCars.ClientConst.PASSWORD, userPassword);
             contentValues.put(ConstCars.ClientConst.PHONE_NUMBER, userPhone);
             contentValues.put(ConstCars.ClientConst.USER_NAME, "");
-            str = DbManagerFactory.getManager().AddClient(contentValues);
+            new AsyncTask<Void, Void, String>()
+            {
+                @Override
+                protected void onPostExecute(String idResult)
+                {
+                    super.onPostExecute(idResult);
+                    if (idResult != null)
+                        Toast.makeText(getBaseContext(), "insert id: " + idResult, Toast.LENGTH_LONG).show();
+                }
+                @Override
+                protected String doInBackground(Void... params)
+                {
+                    try {
+                        return DbManagerFactory.getManager().AddClient(contentValues);
+                    } catch (Exception e) {
+                        return  null;
+                    }
+                } }.execute();
+            //str = DbManagerFactory.getManager().AddClient(contentValues);
             Toast.makeText(getApplicationContext(),R.string.welcome, Toast.LENGTH_SHORT);    
             
         }

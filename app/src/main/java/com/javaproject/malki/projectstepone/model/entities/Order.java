@@ -12,9 +12,9 @@ public class Order
 {
     //static field to edit the request number
     private static int number = 0;
-    private int clientNumber;//client number is the client's ID
+    private String clientNumber;//client number is the client's ID
     private boolean orderStatus; //true = open , false = close
-    private int carNumber;
+    private String carNumber;
     private Date startRent = new Date();//initialized only when creating the order
     private Date endRent;
     private float startMileage;
@@ -36,7 +36,7 @@ public class Order
     }
 
     //constructor
-    public Order(int clientNumber, boolean orderStatus, int carNumber, Date endRent, float startMileage,
+    public Order(String clientNumber, boolean orderStatus, String carNumber, Date endRent, float startMileage,
                  float endMileage, boolean isFuel, DecimalFormat billAmount) throws Exception {
         this.setClientNumber(clientNumber);
         this.setOrderStatus(orderStatus);
@@ -68,11 +68,11 @@ public class Order
         this.orderNumber = ++number;
     }
     //get and set
-    public int getClientNumber() {
+    public String getClientNumber() {
         return clientNumber;
     }
 
-    public void setClientNumber(int clientNumber) {
+    public void setClientNumber(String clientNumber) {
         this.clientNumber = clientNumber;
     }
 
@@ -86,11 +86,11 @@ public class Order
         if(!orderStatus){this.setEndRent(new Date());}
     }
 
-    public int getCarNumber() {
+    public String getCarNumber() {
         return carNumber;
     }
 
-    public void setCarNumber(int carNumber) {
+    public void setCarNumber(String carNumber) {
         this.carNumber = carNumber;
     }
 

@@ -2,6 +2,7 @@ package com.javaproject.malki.projectstepone.controller;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -30,7 +31,9 @@ public class AddCar extends Activity implements View.OnClickListener, SeekBar.On
     private EditText mileageNum;
     private SeekBar fuel;
     private Button addCar;
-
+    //arrays to spinner
+    List<CarModel> carModelList;
+    List<Branch> branchList;
     private void findViews()
     {
         locNum = (Spinner) findViewById(R.id.locationNumber);
@@ -41,9 +44,6 @@ public class AddCar extends Activity implements View.OnClickListener, SeekBar.On
         addCar = (Button) findViewById(R.id.addCar);
 
         addCar.setOnClickListener(this);
-        //TODO this should be in asynctask
-        locNum.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getLocations()));
-        modelNum.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getModels()));
         fuel.setOnSeekBarChangeListener(this);
 
     }
@@ -51,9 +51,10 @@ public class AddCar extends Activity implements View.OnClickListener, SeekBar.On
     //get strings from current DB to spinner
     private String[] getLocations()
     {
+
         String s[] = new String[]{};
         List<String> lst = new ArrayList<String>();
-        for (Branch b : DbManagerFactory.getManager().GetBranches())
+        for (Branch b : branchList)
         {
                lst.add(String.format("%d", b.getBranchNumber()));
         }
@@ -62,13 +63,15 @@ public class AddCar extends Activity implements View.OnClickListener, SeekBar.On
 
     private String[] getModels()
     {
+
         String s[] = new String[]{};
         List<String> lst = new ArrayList<String>();
-        for (CarModel cm : DbManagerFactory.getManager().GetModels())
+        for (CarModel cm : carModelList)
         {
             lst.add(cm.getModel());
         }
         return lst.toArray(s);
+
     }
     public AddCar() {
         super();
@@ -128,8 +131,25 @@ public class AddCar extends Activity implements View.OnClickListener, SeekBar.On
                 contentValues.put(ConstCars.CarConst.LOCATION_NUMBER, licenceNum);
                 contentValues.put(ConstCars.CarConst.FUEL, fmode.toString());
                 contentValues.put(ConstCars.CarConst.LICENCE_NUMBER, licenceNum);
-
-                str = DbManagerFactory.getManager().AddCar(contentValues);
+                new AsyncTask<Void, Void, String>()
+                {
+                    @Override
+                    protected void onPostExecute(String idResult)
+                    {
+                        super.onPostExecute(idResult);
+                        if (idResult != null)
+                            Toast.makeText(getBaseContext(), "Insert car: " + idResult, Toast.LENGTH_LONG).show();
+                    }
+                    @Override
+                    protected String doInBackground(Void... params)
+                    {
+                        try {
+                            return DbManagerFactory.getManager().AddCar(contentValues);
+                        } catch (Exception e) {
+                            return  null;
+                        }
+                    } }.execute();
+                //str = DbManagerFactory.getManager().AddCar(contentValues);
 
             }
             else
@@ -156,6 +176,33 @@ public class AddCar extends Activity implements View.OnClickListener, SeekBar.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_car);
+
+        //set spinner views
+        new AsyncTask<Void,Void,Void>(){
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                initiSpinners();
+            }
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                carModelList = DbManagerFactory.getManager().GetModels();
+                branchList = DbManagerFactory.getManager().GetBranches();
+                return null;
+            }
+        }.execute();
         findViews();
+    }
+
+    private void initiSpinners() {
+        String [] locations = getLocations();
+        ArrayAdapter<String> branchAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,locations);
+        branchAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        locNum.setAdapter(branchAdapter);
+        String [] models = getModels();
+        ArrayAdapter<String> modelAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,models);
+        modelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        modelNum.setAdapter(modelAdapter);
     }
 }

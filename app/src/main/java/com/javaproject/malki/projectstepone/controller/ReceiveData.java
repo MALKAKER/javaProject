@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.graphics.ColorSpace;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,6 +16,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +44,7 @@ public class ReceiveData extends Activity implements View.OnClickListener{
     private CheckBox isOrder;
     private CheckBox currentChoose;
     private Button searchButton;
+    private ListView resultsView;
     private ScrollView scrollResults;
     //private TextView result;
 
@@ -52,7 +57,8 @@ public class ReceiveData extends Activity implements View.OnClickListener{
         isBranch = (CheckBox) findViewById(R.id.checkbox_branch);
         isOrder = (CheckBox) findViewById(R.id.checkbox_order);
         searchButton = (Button) findViewById(R.id.searchButton);
-        scrollResults = (ScrollView) findViewById(R.id.scrollResults);
+        //scrollResults = (ScrollView) findViewById(R.id.scrollResults);
+        resultsView = (ListView) findViewById(R.id.results) ;
         //result = () findViewById(R.id.result);
 
         searchButton.setOnClickListener(this);
@@ -107,15 +113,6 @@ public class ReceiveData extends Activity implements View.OnClickListener{
             {
                 switch(view.getId()) {
                     case R.id.checkbox_car:
-                        new AsyncTask<Void, Void, ListAdapter>() {
-                            @Override
-                            protected ListAdapter doInBackground(Void... params) {
-                                List<Car> results = SearchCar(terms);
-                                return new ArrayAdapter<Car>(getBaseContext(), R.layout.result_presentation, results);     }
-                            @Override
-                            protected void onPostExecute(ListAdapter adapter) {
-                                //setListAdapter(adapter);//// TODO: 21-Dec-17 adapter and asynctask
-                            } }.execute();
                         SearchCar(terms);
                         break;
                     case R.id.checkbox_model:
@@ -144,115 +141,263 @@ public class ReceiveData extends Activity implements View.OnClickListener{
         }
     }
 
-    private List<Car> SearchCar(String searchTerm)
+    private void SearchCar(final String searchTerm)
     {
-        List<Car> results = new ArrayList<Car>();
-        List<Car> cars = DbManagerFactory.getManager().GetCars();
-        if(searchTerm.equals(""))
+        new AsyncTask<Void, Void , ListAdapter>()
         {
-            return cars;
-        }
-        String terms[] = searchTerm.trim().contains(" ")? searchTerm.split(" "): new String[]{searchTerm};
-        for(Car c : cars)
-        {
-            for(String s: terms)
-            {
-                if(c.toString().contains(s))
+            @Override
+            protected void onPostExecute(ListAdapter adapter) {
+                try {
+                    if (adapter != null)
+                        resultsView.setAdapter(adapter);
+                    else
+                        throw new Exception("No results");
+                }catch (Exception e)
                 {
-                    results.add(c);
-                    break;
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT);
                 }
             }
-        }
-        return results;
+
+            @Override
+            protected ListAdapter doInBackground(Void... voids) {
+                //List<Car> results = new ArrayList<Car>();
+                List<Car> cars = DbManagerFactory.getManager().GetCars();
+
+                if(searchTerm.equals("")&& cars != null)
+                {
+                    return new ArrayAdapter<Car>(getBaseContext(), R.layout.result_presentation, cars);
+
+                }
+                else
+                {
+                    return null;
+                }
+//                String terms[] = searchTerm.trim().contains(" ")? searchTerm.split(" "): new String[]{searchTerm};
+//                for(Car c : cars)
+//                {
+//                    for(String s: terms)
+//                    {
+//                        if(c.toString().contains(s))
+//                        {
+//                            results.add(c);
+//                            break;
+//                        }
+//                    }
+//                }
+//                return new ArrayAdapter<Car>(getBaseContext(), R.layout.result_presentation, results);
+
+            }
+
+        }.execute();
+
+
     }
-    private List<CarModel> SearchCarModel(String searchTerm)
+
+
+
+    private void SearchCarModel(final String searchTerm)
     {
-        List<CarModel> results = new ArrayList<CarModel>();
-        List<CarModel> carModels = DbManagerFactory.getManager().GetModels();
-        if(searchTerm.equals(""))
+        new AsyncTask<Void, Void , ListAdapter>()
         {
-            return carModels;
-        }
-        String terms[] = searchTerm.trim().contains(" ")? searchTerm.split(" "): new String[]{searchTerm};
-        for(CarModel c : carModels)
-        {
-            for(String s: terms)
-            {
-                if(c.toString().contains(s))
+            @Override
+            protected void onPostExecute(ListAdapter adapter) {
+                try {
+                    if (adapter != null)
+                        resultsView.setAdapter(adapter);
+                    else
+                        throw new Exception("No results");
+                }catch (Exception e)
                 {
-                    results.add(c);
-                    break;
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT);
                 }
             }
-        }
-        return results;
+
+            @Override
+            protected ListAdapter doInBackground(Void... voids) {
+                //List<CarModel> results = new ArrayList<CarModel>();
+                List<CarModel> carModels = DbManagerFactory.getManager().GetModels();
+                if(searchTerm.equals("") && carModels != null)
+                {
+                    return new ArrayAdapter<CarModel>(getBaseContext(), R.layout.result_presentation, carModels);
+
+                }
+                else
+                {
+                    return null;
+                }
+//                String terms[] = searchTerm.trim().contains(" ")? searchTerm.split(" "): new String[]{searchTerm};
+//                for(CarModel c : carModels)
+//                {
+//                    for(String s: terms)
+//                    {
+//                        if(c.toString().contains(s))
+//                        {
+//                            results.add(c);
+//                            break;
+//                        }
+//                    }
+//                }
+//
+//                return new ArrayAdapter<CarModel>(getBaseContext(), R.layout.result_presentation, results);
+
+            }
+
+        }.execute();
+
     }
-    private List<Client> SearchClient(String searchTerm)
+    private void SearchClient(final String searchTerm)
     {
-        List<Client> results = new ArrayList<Client>();
-        List<Client> Clients = DbManagerFactory.getManager().GetClients();
-        if(searchTerm.equals(""))
+        new AsyncTask<Void, Void , ListAdapter>()
         {
-            return Clients;
-        }
-        String terms[] = searchTerm.trim().contains(" ")? searchTerm.split(" "): new String[]{searchTerm};
-        for(Client c : Clients)
-        {
-            for(String s: terms)
-            {
-                if(c.toString().contains(s))
+            @Override
+            protected void onPostExecute(ListAdapter adapter) {
+                try {
+                    if (adapter != null)
+                        resultsView.setAdapter(adapter);
+                    else
+                        throw new Exception("No results");
+                }catch (Exception e)
                 {
-                    results.add(c);
-                    break;
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT);
                 }
             }
-        }
-        return results;
+
+            @Override
+            protected ListAdapter doInBackground(Void... voids) {
+                //List<Client> results = new ArrayList<Client>();
+                List<Client> Clients = DbManagerFactory.getManager().GetClients();
+
+
+                if(searchTerm.equals("") && Clients != null)
+                {
+                    return new ArrayAdapter<Client>(getBaseContext(), R.layout.result_presentation, Clients);
+
+                }
+                else
+                {
+                    return null;
+                }
+//                String terms[] = searchTerm.trim().contains(" ")? searchTerm.split(" "): new String[]{searchTerm};
+//                for(Client c : Clients)
+//                {
+//                    for(String s: terms)
+//                    {
+//                        if(c.toString().contains(s))
+//                        {
+//                            results.add(c);
+//                            break;
+//                        }
+//                    }
+//                }
+//
+//                return new ArrayAdapter<Client>(getBaseContext(), R.layout.result_presentation, results);
+
+            }
+
+        }.execute();
+
     }
-    private List<Branch> SearchBranch(String searchTerm)
+    private void SearchBranch(final String searchTerm)
     {
-        List<Branch> results = new ArrayList<Branch>();
-        List<Branch> Branchs = DbManagerFactory.getManager().GetBranches();
-        if(searchTerm.equals(""))
+        new AsyncTask<Void, Void , ListAdapter>()
         {
-            return Branchs;
-        }
-        String terms[] = searchTerm.trim().contains(" ")? searchTerm.split(" "): new String[]{searchTerm};
-        for(Branch c : Branchs)
-        {
-            for(String s: terms)
-            {
-                if(c.toString().contains(s))
+            @Override
+            protected void onPostExecute(ListAdapter adapter) {
+                try {
+                    if(adapter == null)
+                        resultsView.setAdapter(adapter);
+                    else
+                        throw new Exception("No results");
+                }catch (Exception e)
                 {
-                    results.add(c);
-                    break;
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT);
                 }
             }
-        }
-        return results;
+
+            @Override
+            protected ListAdapter doInBackground(Void... voids) {
+                //List<Branch> results = new ArrayList<Branch>();
+                List<Branch> Branches = DbManagerFactory.getManager().GetBranches();
+                if(searchTerm.equals("") && Branches != null)
+                {
+                    return new ArrayAdapter<Branch>(getBaseContext(), R.layout.result_presentation, Branches);
+                }
+                else
+                {
+                    return  null;
+                }
+//                else{
+//                    String terms[] = searchTerm.trim().contains(" ")? searchTerm.split(" "): new String[]{searchTerm};
+//                    for(Branch c : Branches)
+//                    {
+//                        for(String s: terms)
+//                        {
+//                            if(c.toString().contains(s))
+//                            {
+//                                results.add(c);
+//                                break;
+//                            }
+//                        }
+//                    }
+//                    if (results != null)
+//                        return new ArrayAdapter<Branch>(getBaseContext(), R.layout.result_presentation, results);
+//                    else
+//                        return null;
+//                }
+
+            }
+
+        }.execute();
     }
-    private List<Order> SearchOrder(String searchTerm)
+    private void SearchOrder(final String searchTerm)
     {
-        List<Order> results = new ArrayList<Order>();
-        List<Order> Orders = DbManagerFactory.getManager().GetOrders();
-        if(searchTerm.equals(""))
+        new AsyncTask<Void, Void , ListAdapter>()
         {
-            return Orders;
-        }
-        String terms[] = searchTerm.trim().contains(" ")? searchTerm.split(" "): new String[]{searchTerm};
-        for(Order c : Orders)
-        {
-            for(String s: terms)
-            {
-                if(c.toString().contains(s))
+            @Override
+            protected void onPostExecute(ListAdapter adapter) {
+                try {
+                    if(adapter == null)
+                        resultsView.setAdapter(adapter);
+                    else
+                        throw new Exception("No results");
+                }catch (Exception e)
                 {
-                    results.add(c);
-                    break;
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT);
                 }
             }
-        }
-        return results;
+
+            @Override
+            protected ListAdapter doInBackground(Void... voids) {
+                //List<Order> results = new ArrayList<Order>();
+                List<Order> Orders = DbManagerFactory.getManager().GetOrders();
+                if(searchTerm.equals(""))
+                {
+                    return new ArrayAdapter<Order>(getBaseContext(), R.layout.result_presentation, Orders);
+                }else
+                {
+                    return  null;
+                }
+//                String terms[] = searchTerm.trim().contains(" ")? searchTerm.split(" "): new String[]{searchTerm};
+//                for(Order c : Orders)
+//                {
+//                    for(String s: terms)
+//                    {
+//                        if(c.toString().contains(s))
+//                        {
+//                            results.add(c);
+//                            break;
+//                        }
+//                    }
+//                }
+//
+//
+//
+//                return new ArrayAdapter<Order>(getBaseContext(), R.layout.result_presentation, results);
+
+            }
+
+        }.execute();
+
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {

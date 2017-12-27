@@ -2,6 +2,7 @@ package com.javaproject.malki.projectstepone.controller;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.view.Gravity;
@@ -187,7 +188,25 @@ public class AddModel extends Activity implements View.OnClickListener, Compound
             //todo asynctask
             if (isMil && miNum == 1)
                 throw new Exception(getString(R.string.Missing_field_Error));
-            DbManagerFactory.getManager().AddModel(contentValues);
+            new AsyncTask<Void, Void, String>()
+            {
+                @Override
+                protected void onPostExecute(String idResult)
+                {
+                    super.onPostExecute(idResult);
+                    if (idResult != null)
+                        Toast.makeText(getBaseContext(), "insert id: " + idResult, Toast.LENGTH_LONG).show();
+                }
+                @Override
+                protected String doInBackground(Void... params)
+                {
+                    try {
+                        return DbManagerFactory.getManager().AddModel(contentValues);
+                    } catch (Exception e) {
+                        return  null;
+                    }
+                } }.execute();
+            //DbManagerFactory.getManager().AddModel(contentValues);
             //Toast if the action succeed
             Toast.makeText(getApplicationContext(), R.string.The_model_successfully_added , Toast.LENGTH_LONG).show();
 

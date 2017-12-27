@@ -92,13 +92,19 @@
             android:textColor="@color/app_theme_dark_red"
             android:textSize="20dp"/>
         <!--TODO ask oshri-->
-        <ScrollView
-            android:id="@+id/scrollResults"
-            android:layout_width="match_parent"
-            android:layout_height="0dip"
-            android:layout_weight="4">
+        <!--<ScrollView-->
+            <!--android:id="@+id/scrollResults"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0dip"-->
+            <!--android:layout_weight="4">-->
 
-            <include layout="@layout/result_presentation" />
-        </ScrollView>
+            <ListView
+                android:id="@+id/results"
+                android:layout_width="match_parent"
+                android:layout_height="0dip"
+                android:layout_weight="4"
+                android:scrollbars="vertical"></ListView>
+            <!--<include layout="@layout/result_presentation" />-->
+        <!--</ScrollView>-->
 
     </LinearLayout></android.support.constraint.ConstraintLayout>

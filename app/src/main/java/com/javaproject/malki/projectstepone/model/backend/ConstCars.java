@@ -24,7 +24,8 @@ public class ConstCars {
     public static class AddressConst
     {
         public static String CITY = "city";
-        public static String COUNTRY ="country";
+        public static String COUNTRY = "country";
+        public static String STREET = "street";
         public static String HOUSE = "house";
     }
     public static class BranchConst
@@ -90,13 +91,14 @@ public class ConstCars {
         ContentValues cv = new ContentValues();
         cv.put(AddressConst.CITY, address.getCity());
         cv.put(AddressConst.COUNTRY, String.valueOf(address.getCountry()));//what is value of?
+        cv.put(AddressConst.STREET, address.getStreet());
         cv.put(AddressConst.HOUSE, address.getHouse());
         return cv;
     }
     public static ContentValues BranchToContentValues (Branch branch)
     {
         ContentValues cv = new ContentValues();
-        cv.put(BranchConst.BRANCH_ADDRESS, String.valueOf((AddressToContentValues(branch.getBranchAddress())).valueSet()));
+        cv.put(BranchConst.BRANCH_ADDRESS, branch.getBranchAddress().toString());
         cv.put(BranchConst.BRANCH_NUMBER, branch.getBranchNumber());//what is value of?
         cv.put(BranchConst.PARKING_SPACE, branch.getParkingSpace());
         return cv;
@@ -165,13 +167,14 @@ public class ConstCars {
         Address address = new Address();
         address.setCity(cv.getAsString(AddressConst.CITY));
         address.setCountry(ENUMS.COUNTRY.valueOf(cv.getAsString(AddressConst.COUNTRY)));
+        address.setStreet(cv.getAsString(AddressConst.STREET));
         address.setHouse(cv.getAsInteger(AddressConst.HOUSE));
         return  address;
     }
     public static  Branch ContentValuesToBranch(ContentValues cv) throws Exception {
         Branch branch = new Branch();
-        String[] s = (cv.getAsString(BranchConst.BRANCH_ADDRESS).replaceAll("]","")).split(",");
-        Address address = new Address(s[1].split("=")[1],ENUMS.COUNTRY.valueOf(s[0].split("=")[1]),Integer.parseInt(s[2].split("=")[1]));
+        String[] s = (cv.getAsString(BranchConst.BRANCH_ADDRESS).split(","));
+        Address address = new Address(s[1],ENUMS.COUNTRY.valueOf(s[0]),s[2],Integer.parseInt(s[3]));
         branch.setBranchAddress(address);//!
         branch.setParkingSpace(cv.getAsInteger(BranchConst.PARKING_SPACE));
         branch.setBranchNumber(cv.getAsLong(BranchConst.BRANCH_NUMBER));
@@ -221,9 +224,9 @@ public class ConstCars {
     public static  Order ContentValuesToOrder(ContentValues cv) throws Exception {
         SimpleDateFormat tmp = new SimpleDateFormat("MM/dd/yyyy HH:mm");
         Order order = new Order(cv.getAsInteger(OrderConst.ORDER_NUMBER));
-        order.setClientNumber(cv.getAsInteger(OrderConst.CLIENT_NUMBER));
+        order.setClientNumber(cv.getAsString(OrderConst.CLIENT_NUMBER));
         order.setOrderStatus(cv.getAsBoolean(OrderConst.ORDER_STATUS));
-        order.setCarNumber(cv.getAsInteger(OrderConst.CAR_NUMBER));//?
+        order.setCarNumber(cv.getAsString(OrderConst.CAR_NUMBER));//?
         order.setStartRent(tmp.parse(cv.getAsString(OrderConst.START_RENT)) );
         order.setEndRent(tmp.parse(cv.getAsString(OrderConst.END_RENT)));
         order.setStartMileage(cv.getAsFloat(OrderConst.START_MILEAGE));
